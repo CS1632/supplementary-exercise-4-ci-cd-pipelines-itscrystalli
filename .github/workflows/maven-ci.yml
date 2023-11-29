@@ -53,7 +53,13 @@ jobs:
         path: .
         
   # Uploads dependency graph to GitHub to receive Dependabot alerts 
-  update_dependence_graph:
+  update_dependence_graph:      
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
     #added
     - name: Restore cached build
       uses: actions/cache@v3
@@ -61,13 +67,6 @@ jobs:
         key: cached-build-${{github.sha}}
         path: .
         
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-
-    steps:
-
     # https://github.com/marketplace/actions/maven-dependency-tree-dependency-submission
     - name: Update dependency graph
       uses: advanced-security/maven-dependency-submission-action@v3
